@@ -35,7 +35,8 @@ async function generarDiagnostico() {
         ==============================================================
         `;
         
-        //Escribir console.log("--- FIN DEL REPORTE ---"); y guardar el cambio
+        //Escribir y guardar el cambio 
+        //console.log("--- FIN DEL REPORTE ---"); 
 
         await fs.appendFile(archivoLog, log);
         console.log("Diagnostico guardado con éxito en: ")
