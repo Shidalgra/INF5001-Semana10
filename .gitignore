@@ -416,3 +416,19 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
+# Dependencias
+node_modules/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# Entorno y variables sensibles (por si acaso usas .env luego)
+.env
+.env.local
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
