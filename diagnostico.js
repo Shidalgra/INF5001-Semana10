@@ -34,6 +34,8 @@ async function generarDiagnostico() {
         TIEMPO ACTIVIDAD:   ${infoHost.uptimeHoras} HORAS
         ==============================================================
         `;
+        
+        //Escribir console.log("--- FIN DEL REPORTE ---"); y guardar el cambio
 
         await fs.appendFile(archivoLog, log);
         console.log("Diagnostico guardado con éxito en: ")
