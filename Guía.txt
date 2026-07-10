@@ -15,4 +15,11 @@ por defecto; cada documento puede tener campos diferentes si así se requiere.
 
 ----------------------------------------------------------------------------------------------------------------------------
 
+Una app de lista de tareas (To-Do List) avanzada nos permitirá modelar datos fácilmente y entender cómo guardar,
+leer, actualizar y borrar documentos en MongoDB usando Node.js.
 
+De acuerdo con el material de la Semana 10, todo proyecto profesional de Node.js debe comenzar preparando su entorno
+y su "cédula de identidad".
+
+Para poner las manos en el código, el primer paso es crear una carpeta vacía en tu computadora para el proyecto 
+(por ejemplo, todo-mongo-app), abrir la terminal dentro de esa carpeta y prepararla para usar paquetes de NPM.
