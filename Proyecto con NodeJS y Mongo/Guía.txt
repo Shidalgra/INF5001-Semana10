@@ -1,0 +1,18 @@
+Es totalmente normal que se sienta extraño pasar de un mundo tan estructurado como el de SQL 
+(donde todo son tablas 📊, filas, columnas y claves foráneas) a uno NoSQL como MongoDB.
+
+Para que tu mente haga el puente rápido entre lo que ya conoces y lo nuevo, mira esta equivalencia básica:
+
+* Base de datos 🗄️ ➔ Sigue llamándose Base de datos.
+
+* Tabla 📋 ➔ En MongoDB se llama Colección (Collection).
+
+* Fila / Registro 📑 ➔ En MongoDB se llama Documento (Document) y se guarda en un formato muy parecido a JSON.
+
+La gran diferencia es que en MongoDB no hay "tablas relacionales" estrictas ni esquemas fijos obligatorios 
+por defecto; cada documento puede tener campos diferentes si así se requiere.
+
+
+----------------------------------------------------------------------------------------------------------------------------
+
+
