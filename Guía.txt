@@ -1,25 +1,269 @@
-Es totalmente normal que se sienta extraño pasar de un mundo tan estructurado como el de SQL 
-(donde todo son tablas 📊, filas, columnas y claves foráneas) a uno NoSQL como MongoDB.
+Es totalmente normal que se sienta extraño pasar de un mundo tan estructurado 
+como el de SQL (donde todo son tablas 📊, filas, columnas y claves foráneas) 
+a uno NoSQL como MongoDB.
 
-Para que tu mente haga el puente rápido entre lo que ya conoces y lo nuevo, mira esta equivalencia básica:
+Para que tu mente haga el puente rápido entre lo que ya conoces y lo nuevo, 
+mira esta equivalencia básica:
 
-* Base de datos 🗄️ ➔ Sigue llamándose Base de datos.
+*   Base de datos 🗄️ ➔ Sigue llamándose Base de datos.
 
-* Tabla 📋 ➔ En MongoDB se llama Colección (Collection).
+*   Tabla 📋 ➔ En MongoDB se llama Colección (Collection).
 
-* Fila / Registro 📑 ➔ En MongoDB se llama Documento (Document) y se guarda en un formato muy parecido a JSON.
+*   Fila / Registro 📑 ➔ En MongoDB se llama Documento (Document) y se 
+*   guarda en un formato muy parecido a JSON.
 
-La gran diferencia es que en MongoDB no hay "tablas relacionales" estrictas ni esquemas fijos obligatorios 
-por defecto; cada documento puede tener campos diferentes si así se requiere.
-
+La gran diferencia es que en MongoDB no hay "tablas relacionales" estrictas 
+ni esquemas fijos obligatorios por defecto; cada documento puede tener campos 
+diferentes si así se requiere.
 
 ----------------------------------------------------------------------------------------------------------------------------
 
-Una app de lista de tareas (To-Do List) avanzada nos permitirá modelar datos fácilmente y entender cómo guardar,
-leer, actualizar y borrar documentos en MongoDB usando Node.js.
+Una app de lista de tareas (To-Do List) avanzada nos permitirá modelar datos 
+fácilmente y entender cómo guardar, leer, actualizar y borrar documentos en 
+MongoDB usando Node.js.
 
-De acuerdo con el material de la Semana 10, todo proyecto profesional de Node.js debe comenzar preparando su entorno
-y su "cédula de identidad".
+De acuerdo con el material de la Semana 10, todo proyecto profesional de 
+Node.js debe comenzar preparando su entorno y su "cédula de identidad".
 
-Para poner las manos en el código, el primer paso es crear una carpeta vacía en tu computadora para el proyecto 
-(por ejemplo, todo-mongo-app), abrir la terminal dentro de esa carpeta y prepararla para usar paquetes de NPM.
+Para poner las manos en el código, el primer paso es crear una carpeta vacía 
+en tu computadora para el proyecto (por ejemplo, todo-mongo-app), abrir la 
+terminal dentro de esa carpeta y prepararla para usar paquetes de NPM.
+
+/*--------------------------------------------------------------------------*/
+Paso 1: Crear la carpeta del proyecto
+    Abrimos la terminal de tu computadora (o la terminal integrada de VS Code).
+
+    Crea una nueva carpeta para el proyecto ejecutando:
+
+*   Bash
+    mkdir todo-mongo-app
+
+Entra a esa carpeta con el comando:
+
+*   Bash
+    cd todo-mongo-app
+
+/*--------------------------------------------------------------------------*/
+Paso 2: Inicializar el proyecto con NPM
+Como se menciona al final de tu lectura de la Semana 10, para preparar el 
+entorno e iniciar el archivo de configuración package.json con los valores 
+por defecto, debes ejecutar:
+
+*   Bash
+    npm init -y
+
+Esto creará un archivo llamado package.json en tu carpeta, que es donde se 
+registrarán todas las dependencias (librerías) que instalemos.
+
+/*--------------------------------------------------------------------------*/
+Paso 3: Instalar las dependencias necesarias
+Para este proyecto necesitamos tres herramientas clave del ecosistema NPM:
+
+Express: El framework web para manejar las rutas (páginas y API).
+Mongoose: La librería que nos permite conectarnos y modelar datos en MongoDB 
+de forma sencilla (ideal para los que vienen de SQL).
+Nodemon: Una herramienta de desarrollo que reinicia el servidor automáticamente
+cada vez que guardas un cambio.
+
+Ejecuta el siguiente comando en tu terminal para instalarlas:
+
+*   Bash
+    npm install express mongoose nodemon
+
+/*--------------------------------------------------------------------------*/
+Paso 4: Configurar el arranque automático (Nodemon)
+Abre la carpeta todo-mongo-app en tu editor de código (como VS Code).
+
+*   Abre el archivo package.json.
+
+Busca la sección que dice "scripts" y agrega una línea para usar nodemon. 
+Debería quedar exactamente así:
+
+*   JSON
+    /*--------*/
+    "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+    },
+    /*--------*/
+
+/*--------------------------------------------------------------------------*/
+Paso 5: Crear el archivo principal del servidor
+Crea un archivo nuevo en la raíz de la carpeta llamado: 
+
+*   index.js.
+
+Copia y pega el siguiente código básico para levantar el servidor Express:
+
+*   JavaScript
+    /*--------*/
+    const express = require('express');
+    const app = express();
+    const PORT = 3000;
+
+    // Middleware para entender datos en formato JSON y formularios
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
+
+    // Ruta de prueba inicial
+    app.get('/', (req, res) => {
+        res.send('¡Servidor de Lista de Tareas funcionando!');
+    });
+
+    // Iniciar el servidor
+    app.listen(PORT, () => {
+        console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    });
+    /*--------*/
+
+/*--------------------------------------------------------------------------*/
+Paso 6: Probar que todo funcione
+En tu terminal, ejecuta el comando de desarrollo que configuramos:
+
+*   Bash
+    npm run dev
+
+Si todo está bien, verás un mensaje que dice: Servidor corriendo en 
+http://localhost:3000. Si abres ese enlace en tu navegador, verás el mensaje 
+de éxito.
+
+Ya tenemos la estructura base y el servidor corriendo sin rodeos. El siguiente
+paso es conectar esto a MongoDB y crear la estructura de las tareas.
+
+-----Probemos y veamos sí está funcionando-----
+
+¡Excelente! El servidor ya está vivo. 🔌 Ahora vamos a conectarlo a MongoDB y a definir la estructura de nuestros datos.
+
+/*--------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------*/
+
+Como vienes de SQL, recuerdas que primero creabas una tabla con columnas fijas
+y tipos de datos (como VARCHAR, INT). En MongoDB usamos Mongoose para definir 
+un Esquema (Schema), que es el molde que le dice a la base de datos cómo 
+lucirá cada "documento" de tarea.
+
+
+/*--------------------------------------------------------------------------*/
+Paso 7: Conectar a MongoDB y crear el Modelo
+Crea una carpeta en la raíz de tu proyecto para 
+mantener el código ordenado llamada:
+
+*   models.
+
+Dentro de la carpeta models, crea un archivo llamado 
+
+*   Tarea.js.
+
+Copia y pega el siguiente código en Tarea.js:
+
+    /*--------*/
+*   JavaScript
+    const mongoose = require('mongoose');
+
+    // Este es el molde (Esquema) de tu tabla/colección
+    const TareaSchema = new mongoose.Schema({
+        titulo: {
+            type: String,
+            required: true // No puede estar vacío (como NOT NULL en SQL)
+        },
+        completada: {
+            type: Boolean,
+            default: false // Por defecto, la tarea no está hecha
+        },
+        fechaCreacion: {
+            type: Date,
+            default: Date.now // Guarda la fecha actual automáticamente
+        }
+    });
+
+    // Exportamos el modelo para usarlo en el servidor
+    module.exports = mongoose.model('Tarea', TareaSchema);
+    /*--------*/
+
+/*--------------------------------------------------------------------------*/
+Paso 8: Actualizar index.js para conectar la Base de Datos
+Abre tu archivo index.js y modifícalo para que incluya la conexión. Debe
+quedar exactamente así:
+
+    /*--------*/
+*   Javascript
+    const express = require('express');
+    const mongoose = require('mongoose'); // 1. Importamos mongoose
+    const app = express();
+    const PORT = 3000;
+
+    app.use(express.json());
+    app.use(express.urlencoded({ extended: true }));
+
+    // 2. Conexión a MongoDB (creará una base de datos llamada 'todoDB' automáticamente)
+    mongoose.connect('mongodb://localhost:21017/todoDB')
+    .then(() => console.log('¡Conectado exitosamente a MongoDB! 🍃'))
+    .catch(err => console.error('Error al conectar a MongoDB:', err));
+
+    app.get('/', (req, res) => {
+        res.send('¡Servidor de Lista de Tareas funcionando!');
+    });
+
+    app.listen(PORT, () => {
+        console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    });
+    /*--------*/
+
+Al guardar el archivo, nodemon reiniciará el servidor. Si tienes MongoDB 
+instalado y corriendo en tu computadora, verás el mensaje de éxito en la terminal.
+
+/*--------------------------------------------------------------------------*/
+/*--------------------------------------------------------------------------*/
+
+¡Excelente! El servidor Express ya está en marcha. 🚀
+
+Ahora necesitamos verificar si también se conectó correctamente a MongoDB. En la
+terminal, justo debajo de "Servidor corriendo...", deberías ver otro mensaje.
+
+¿Te apareció el mensaje de ¡Conectado exitosamente a MongoDB! 🍃 o te mostró algún
+error en la pantalla? 💻
+
+nooo
+
+/*--------------------------------------------------------------------------*/
+Ese error ocurrió por un pequeño detalle en el código que te di. Escribí mal el 
+número del puerto.
+
+El puerto por defecto de MongoDB es el 27017, y en el código pusimos 21017 
+(con un 1 en lugar de un 7), por lo que Node.js no encuentra la base de datos 
+abierta ahí.
+
+La Solución 🛠️
+Abre tu archivo index.js, busca la línea de la conexión y cambia el número del 
+puerto. Debe quedar exactamente así:
+
+    /*--------*/
+*   JavaScript
+    // Cambia el 21017 por 27017    cambiamos el 1 por 7
+    mongoose.connect('mongodb://localhost:27017/todoDB')
+    /*--------*/
+
+Guarda el archivo y deja que nodemon reinicie el servidor.
+¿Qué mensajes te aparecen ahora en la terminal tras corregir el puerto? 🍃
+
+/*--------------------------------------------------------------------------*/
+
+El error ECONNREFUSED significa que tu código está tocando la puerta del puerto 27017,
+pero nadie está respondiendo ahí. 🚪❌
+
+Esto ocurre por dos razones comunes en Windows:
+
+Node.js intenta conectarse usando IPv6 (::1), pero MongoDB suele escuchar solo 
+en IPv4 (127.0.0.1).
+
+El servicio de MongoDB no está encendido en tu computadora.
+
+Paso 1: Forzar el uso de IPv4
+Vamos a descartar el problema de red cambiando localhost por la dirección IP 
+directa. Abre index.js y modifica la línea de conexión para que quede así:
+
+
+    /*--------*/
+*   JavaScript
+    mongoose.connect('mongodb://127.0.0.1:27017/todoDB')
+    /*--------*/
