@@ -213,5 +213,126 @@ Ahora probemos y si ponemos en el navegador estando corriendo el servidor:
 
 Deberíamos poder ver lo que ya está en MongoDB, Insertar y eliminar...
 
+/* --------------------------------------------------------------------------------------- */
 
+Mejorando el Diseño (CSS)
+Para lograr un aspecto de alta calidad, podemos aplicar algunas técnicas de diseño actuales:
 
+Fondo y Contenedor: Usar un fondo suave con un contenedor blanco que tenga esquinas redondeadas
+🔲 y una sombra sutil para darle profundidad.
+
+Tipografía y Colores: Cambiar la fuente clásica por una más limpia como 'Segoe UI' o Roboto, 
+y usar una paleta de colores armónica 
+(por ejemplo, tonos de azul oscuro, gris y acentos verdes o rojos).
+
+Efectos Interactivos (Hover): Añadir transiciones suaves en los botones para que cambien de color
+suavemente al pasar el mouse por encima.
+
+Distribución de Elementos: Usar flexbox en los elementos de la lista (<li>) para que el texto de 
+la tarea quede alineado a la izquierda y el botón de eliminar se mantenga fijo a la derecha de 
+forma ordenada.
+
+Aquí tienes estilos para reemplazar tu style.css:
+
+    /*----------------------*/
+    /* 1. Configuración General */
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f6f9;
+        color: #333;
+        max-width: 600px;
+        margin: 60px auto;
+        padding: 20px;
+    }
+
+    /* 2. Título Principal */
+    h1 {
+        text-align: center;
+        color: #2c3e50;
+        margin-bottom: 30px;
+    }
+
+    /* 3. Formulario de Entrada */
+    form {
+        display: flex;
+        gap: 12px;
+        margin-bottom: 25px;
+        background: white;
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    input {
+        flex: 1;
+        padding: 12px;
+        border: 1px solid #ced4da;
+        border-radius: 6px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+    }
+
+    input:focus {
+        outline: none;
+        border-color: #007bff;
+    }
+
+    button[type="submit"] {
+        padding: 12px 20px;
+        background-color: #28a745;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #218838;
+    }
+
+    /* 4. Lista de Tareas */
+    #lista-tareas {
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        background: white;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+        transition: transform 0.2s;
+    }
+
+    li:hover {
+        transform: translateY(-2px);
+    }
+
+    li span {
+        font-size: 16px;
+        color: #495057;
+    }
+
+    /* 5. Botón de Eliminar genérico dentro de la lista */
+    li button {
+        padding: 8px 12px;
+        background-color: #dc3545;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+        transition: background-color 0.2s;
+    }
+
+    li button:hover {
+        background-color: #bd2130;
+    }
+    /*----------------*/
