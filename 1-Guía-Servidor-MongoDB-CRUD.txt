@@ -617,17 +617,16 @@ reacciona MongoDB Compass 📊.
 Primero, para la Actualización (PUT) y la Eliminación (DELETE), necesitamos el identificador 
 único que MongoDB le asignó a tu primera tarea.
 
+/*--------------------------------------------------------------------------*/
 *   Paso 1: Obtener el _id
 Abre MongoDB Compass y entra a tu colección tareas (dentro de todoDB).
 
 Verás el documento que creamos antes. Busca el campo que dice _id y copia ese texto largo 
 entre comillas (por ejemplo: 65f1abc...).
 
+/*--------------------------------------------------------------------------*/
 *   Paso 2: Prueba de Actualización (PUT) 🔄
-Vamos a cambiar el título de esa tarea existente.
-
-En Thunder Client, cambia el método a PUT.
-
+Vamos a cambiar el título de esa tarea existente. En Thunder Client, cambia el método a PUT.
 En la URL, pega el ID al final de la dirección, quedando algo así: 
 
 *   http://localhost:3000/tareas/TU_ID_AQUÍ
@@ -641,8 +640,10 @@ En la pestaña Body (JSON), escribe el nuevo título:
     }
     /*--------*/
 
-Presiona Send. Deberías recibir un código 200 OK y ver el texto modificado.
+Presiona Send. Deberías recibir un código 200 OK y ver el texto modificado. en compass
+debemos refrescar con el botón de flechas circulares debajo de "find" en el menu superior
 
+/*--------------------------------------------------------------------------*/
 *   Paso 3: Prueba de Creación (POST) ➕
 Vamos a introducir la segunda tarea que mencionaste.
 
@@ -662,7 +663,8 @@ En el Body (JSON), escribe el título de la nueva tarea:
 Presiona Send. Revisa la respuesta y copia el nuevo _id que se acaba de generar para 
 esta segunda tarea.
 
-Paso 4: Prueba de Eliminación (DELETE) 🗑️
+/*--------------------------------------------------------------------------*/
+*   Paso 4: Prueba de Eliminación (DELETE) 🗑️
 Ahora vamos a borrar esta última tarea que acabamos de crear.
 
 Cambia el método a DELETE.
