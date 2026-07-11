@@ -5,6 +5,7 @@ const PORT = 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static('public'));
 
 // Importamos el modelo de la Tarea
 const Tarea = require('./models/Tarea');
@@ -56,7 +57,6 @@ app.delete('/tareas/:id', async (req, res) => {
         res.status(500).json({ mensaje: 'Error al eliminar la tarea', error });
     }
 });
-
 
 // 2. Conexión a MongoDB (creará una base de datos llamada 'todoDB' automáticamente)
 mongoose.connect('mongodb://127.0.0.1:27017/todoDB')

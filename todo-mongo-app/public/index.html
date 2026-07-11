@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="Assets/css/style.css">
+    <title>Mi Lista de Tareas con MongoDB</title>
+    <link rel="icon" href="Assets/image/Logo_Activando_El_Coeficiente_Intelectual_Tab.png" type="image/png">
+</head>
+<body>
+
+    <h1>📝 Mis Tareas</h1>
+    
+    <form id="formulario-tarea">
+        <input type="text" id="input-titulo" placeholder="Escribe una nueva tarea..." required>
+        <button type="submit">Agregar</button>
+    </form>
+
+    <ul id="lista-tareas"></ul>
+
+    <script src="Assets/js/CRUD-MongoDB.js"></script>
+</body>
+</html>

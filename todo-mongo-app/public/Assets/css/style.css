@@ -1,0 +1,109 @@
+/*Limpiando*/
+
+/* Selecciona TODOS los elementos */
+*,
+*::before,
+*::after {
+  margin: 0;
+  /* Quita márgenes externos */
+  padding: 0;
+  /* Quita rellenos internos */
+  box-sizing: border-box;
+  /* ¡VITAL! Hace que el padding no sume al ancho total */
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Hace que al saltar entre secciones el scroll sea suave */
+}
+
+body {
+  min-height: 100vh;
+  /* Alto del vieport - Que siempre ocupe al menos el alto de la pantalla */
+  line-height: 1.5;
+  /* Mejora la lectura del texto */
+  -webkit-font-smoothing: antialiased;
+  /* Hace que las letras se vean más finas y nítidas */
+  font-family:
+    "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  /* O la fuente que elijas */
+  background-color: #f4f4f4;
+  color: #333;
+  overflow-x: hidden;
+  /* Evita el scroll horizontal molesto por errores de píxeles */
+}
+
+/* Evita que las imágenes se salgan de su contenedor */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  /* Quita un espacio extraño que dejan abajo las imágenes */
+  max-width: 100%;
+}
+
+/* Quita los puntos de las listas (ul/ol) */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Quita la línea de abajo de los enlaces y les da un color base */
+a {
+  text-decoration: none;
+  color: inherit;
+  /* Hereda el color del texto del padre */
+}
+
+/* Hace que los botones y inputs se vean iguales en todos lados */
+button,
+input,
+textarea {
+  font: inherit;
+  /* Obliga a usar la misma fuente que el body */
+  border: none;
+  outline: none;
+  /* Quita el borde azul feo al hacer clic */
+}
+
+button {
+  cursor: pointer;
+  /* Siempre pone la manito al pasar el mouse */
+}
+
+/* --------------------------------------------------------------------------------------- */
+
+
+body {
+    font-family: Arial, sans-serif;
+    max-width: 500px;
+    margin: 40px auto;
+    padding: 20px;
+}
+
+form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+input {
+    flex: 1;
+    padding: 8px;
+}
+
+button {
+    padding: 8px 15px;
+    background: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+li {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    list-style: none;
+}

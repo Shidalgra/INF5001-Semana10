@@ -399,7 +399,7 @@ Para empezar con Postman, el primer paso es instalarlo. Podemos hacerlo de dos f
     herramienta llamada Thunder Client o Postman directamente dentro de las extensiones 
     de VS Code que hace exactamente lo mismo.
 
-*   Te recomiendo Thunder Client, ya que hace lo mismo y es más liviano
+*   Te recomiendo Thunder Client, ya que hace lo mismo y es más liviano y es el que voy a usar
 
 /*--------------------------------------------------------------------------*/
 Pasos para abrir y preparar la petición:
