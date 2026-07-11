@@ -30,7 +30,7 @@ en tu computadora para el proyecto (por ejemplo, todo-mongo-app), abrir la
 terminal dentro de esa carpeta y prepararla para usar paquetes de NPM.
 
 /*--------------------------------------------------------------------------*/
-Paso 1: Crear la carpeta del proyecto
+*   Paso 1: Crear la carpeta del proyecto
     Abrimos la terminal de tu computadora (o la terminal integrada de VS Code).
 
     Crea una nueva carpeta para el proyecto ejecutando:
@@ -44,7 +44,7 @@ Entra a esa carpeta con el comando:
     cd todo-mongo-app
 
 /*--------------------------------------------------------------------------*/
-Paso 2: Inicializar el proyecto con NPM
+*   Paso 2: Inicializar el proyecto con NPM
 Como se menciona al final de tu lectura de la Semana 10, para preparar el 
 entorno e iniciar el archivo de configuración package.json con los valores 
 por defecto, debes ejecutar:
@@ -56,7 +56,7 @@ Esto creará un archivo llamado package.json en tu carpeta, que es donde se
 registrarán todas las dependencias (librerías) que instalemos.
 
 /*--------------------------------------------------------------------------*/
-Paso 3: Instalar las dependencias necesarias
+*   Paso 3: Instalar las dependencias necesarias
 Para este proyecto necesitamos tres herramientas clave del ecosistema NPM:
 
 Express: El framework web para manejar las rutas (páginas y API).
@@ -71,7 +71,7 @@ Ejecuta el siguiente comando en tu terminal para instalarlas:
     npm install express mongoose nodemon
 
 /*--------------------------------------------------------------------------*/
-Paso 4: Configurar el arranque automático (Nodemon)
+*   Paso 4: Configurar el arranque automático (Nodemon)
 Abre la carpeta todo-mongo-app en tu editor de código (como VS Code).
 
 *   Abre el archivo package.json.
@@ -88,7 +88,7 @@ Debería quedar exactamente así:
     /*--------*/
 
 /*--------------------------------------------------------------------------*/
-Paso 5: Crear el archivo principal del servidor
+*   Paso 5: Crear el archivo principal del servidor
 Crea un archivo nuevo en la raíz de la carpeta llamado: 
 
 *   index.js.
@@ -117,7 +117,7 @@ Copia y pega el siguiente código básico para levantar el servidor Express:
     /*--------*/
 
 /*--------------------------------------------------------------------------*/
-Paso 6: Probar que todo funcione
+*   Paso 6: Probar que todo funcione
 En tu terminal, ejecuta el comando de desarrollo que configuramos:
 
 *   Bash
@@ -144,7 +144,7 @@ lucirá cada "documento" de tarea.
 
 
 /*--------------------------------------------------------------------------*/
-Paso 7: Conectar a MongoDB y crear el Modelo
+*   Paso 7: Conectar a MongoDB y crear el Modelo
 Crea una carpeta en la raíz de tu proyecto para 
 mantener el código ordenado llamada:
 
@@ -181,7 +181,7 @@ Copia y pega el siguiente código en Tarea.js:
     /*--------*/
 
 /*--------------------------------------------------------------------------*/
-Paso 8: Actualizar index.js para conectar la Base de Datos
+*   Paso 8: Actualizar index.js para conectar la Base de Datos
 Abre tu archivo index.js y modifícalo para que incluya la conexión. Debe
 quedar exactamente así:
 
@@ -258,7 +258,7 @@ en IPv4 (127.0.0.1).
 
 El servicio de MongoDB no está encendido en tu computadora.
 
-Paso 1: Forzar el uso de IPv4
+*   Paso 1: Forzar el uso de IPv4
 Vamos a descartar el problema de red cambiando localhost por la dirección IP 
 directa. Abre index.js y modifica la línea de conexión para que quede así:
 
@@ -267,3 +267,413 @@ directa. Abre index.js y modifica la línea de conexión para que quede así:
 *   JavaScript
     mongoose.connect('mongodb://127.0.0.1:27017/todoDB')
     /*--------*/
+
+Guarda el archivo. Si la terminal sigue mostrando el mismo error de conexión 
+rechazada, significa que el motor de MongoDB está apagado.
+
+/*--------------------------------------------------------------------------*/
+
+*   Paso 2: Verificar si MongoDB está encendido (Si el Paso 1 falla)
+Si usas la versión instalada en Windows, el servicio puede estar detenido:
+
+Abre el buscador de Windows y escribe Servicios (Services).
+
+Busca en la lista uno llamado MongoDB Server.
+
+Si en su estado no dice "En ejecución", dale clic derecho y selecciona Iniciar.
+
+Prueba cambiando primero a 127.0.0.1 en tu código. ¿Logró conectarse con ese 
+cambio o necesitamos revisar los servicios de Windows? 🍃
+
+/*--------------------------------------------------------------------------*/
+
+Es muy probable que no lo tengas instalado todavía, ya que Windows no lo incluye
+por defecto y es un programa independiente de SQL Server o MySQL.
+
+Por eso el código no encuentra el servidor en el puerto 27017 y muestra el error 
+ECONNREFUSED.
+
+/*--------------------------------------------------------------------------*/
+Para resolver esto sin que tengas que instalar programas pesados en tu computadora,
+la forma más moderna y profesional de trabajar con MongoDB es usar MongoDB Atlas, 
+que es la versión oficial gratuita en la nube. Así, la base de datos corre en los 
+servidores de Mongo y nosotros solo nos conectamos por internet.
+
+/*--------------------------------------------------------------------------*/
+*   Paso 1: Descargar MongoDB Community Server
+Entra a la página oficial de descargas de MongoDB: 
+
+*   https://www.mongodb.com/try/download/community
+
+En la sección de descargas, asegúrate de que esté seleccionada tu versión de 
+Windows y que el paquete sea MSI.
+
+Da clic en el botón Download (Descargar).
+
+/*--------------------------------------------------------------------------*/
+*   Paso 2: Instalar MongoDB en Windows
+Una vez descargado, abre el archivo instalador .msi.
+
+Da clic en Next (Siguiente) y acepta los términos de la licencia.
+
+Elige la instalación Complete (Completa).
+
+Muy importante: Verás una casilla que dice "Install MongoDB as a Service" 
+(Instalar MongoDB como un servicio). Asegúrate de que esté marcada. Esto hará que 
+MongoDB se encienda solo cada vez que prendas tu computadora.
+
+Más adelante, verás otra casilla que dice "Install MongoDB Compass". Déjala marcada.
+MongoDB Compass es una interfaz gráfica (como SQL Server Management Studio o Workbench) 
+que te permitirá ver tus bases de datos de forma visual. 
+
+Solo asegúrate de ver dos cosas en las pantallas que vayan pasando:
+*   Que esté marcada la opción de instalarlo como Servicio (Service).
+*   Que esté marcada la opción de instalar MongoDB Compass.
+
+Da clic en Install, complete, next a todo y luego en Finish cuando termine.
+
+/*--------------------------------------------------------------------------*/
+*   Paso 3: Verificar la instalación
+Una vez que termine la instalación, el servicio de MongoDB debería arrancar 
+automáticamente.
+
+Para comprobarlo, regresa a la terminal de tu proyecto donde tenías el error y 
+mira si nodemon ya reinició el servidor. Sí no lo reinició dale guardar a cualquier archivo
+y voila.
+
+/*--------------------------------------------------------------------------*/
+
+Ahora que la conexión está lista, el siguiente paso es crear las Rutas (Routes) en nuestro 
+archivo index.js. Las rutas son las direcciones que permitirán al usuario realizar acciones 
+como crear, ver, actualizar o borrar tareas (lo que en SQL se conoce como operaciones CRUD 📝).
+
+Vamos a empezar con la primera operación: Crear una tarea (un INSERT en el mundo SQL). 
+Para esto, necesitamos importar el modelo que creamos antes y usar un método de Mongoose 
+llamado .save() o Model.create().
+
+Abre tu archivo index.js y añade estas líneas justo debajo de donde importaste Express y 
+Mongoose, debajo de la línea 7 = app.use(express.urlencoded({ extended: true }));: 
+
+    /*--------*/
+    // Importamos el modelo de la Tarea
+    const Tarea = require('./models/Tarea');
+
+    // Ruta para CREAR una nueva tarea (POST)
+    app.post('/tareas', async (req, res) => {
+        try {
+            const nuevaTarea = new Tarea({
+                titulo: req.body.titulo
+            });
+            await nuevaTarea.save(); // Guarda el documento en MongoDB
+            res.status(201).json(nuevaTarea);
+        } catch (error) {
+            res.status(500).json({ mensaje: 'Error al crear la tarea', error });
+        }
+    });
+    /*--------*/
+
+/*--------------------------------------------------------------------------*/
+En SQL, para insertar un registro usarías algo como INSERT INTO Tareas (titulo) VALUES 
+('Mi tarea'). Aquí, como ves, creamos un nuevo objeto basado en el modelo y lo guardamos 
+directamente.
+
+Para probar que esto funciona sin necesidad de armar todavía la página web (HTML), ¿conoces 
+o has utilizado alguna herramienta como Postman, Thunder Client (en VS Code) o el comando 
+curl para probar rutas de tipo POST?
+
+/*--------------------------------------------------------------------------*/
+Si te llama la atención Postman, es una excelente oportunidad para aprenderlo. En el mundo 
+profesional de desarrollo de software, es la herramienta estándar para probar las APIs y las
+rutas de un servidor antes de construir cualquier interfaz gráfica.
+
+Básicamente, Postman actúa como un "navegador web", pero especializado para desarrolladores:
+te permite enviar datos ocultos, probar diferentes métodos (como POST, PUT, DELETE) y ver 
+exactamente qué responde la base de datos de manera limpia.
+
+Para empezar con Postman, el primer paso es instalarlo. Podemos hacerlo de dos formas:
+
+    Descargar la aplicación de escritorio: Vas a su página oficial, la descargas e instalas 
+    en Windows.
+
+    Usar una extensión en VS Code: Si no quieres instalar otro programa pesado, hay una
+    herramienta llamada Thunder Client o Postman directamente dentro de las extensiones 
+    de VS Code que hace exactamente lo mismo.
+
+*   Te recomiendo Thunder Client, ya que hace lo mismo y es más liviano
+
+/*--------------------------------------------------------------------------*/
+Pasos para abrir y preparar la petición:
+Haz clic en el icono del rayo morado ⚡ en la barra lateral izquierda de VS Code.
+
+En el panel que se abre, haz clic en el botón que dice "New Request" (Nueva Petición).
+
+Verás que se abre una pestaña en el centro de tu pantalla con tres elementos principales
+que debemos configurar:
+
+El método HTTP: Por defecto dice GET. Haz clic sobre él y cámbialo a POST 
+(ya que vamos a enviar datos para crear un registro).
+
+La URL: A la derecha del método, escribe la dirección de nuestra ruta de tareas: 
+http://localhost:3000/tareas
+
+El cuerpo del mensaje (Body): Justo abajo verás varias pestañas (Query, Headers, Body). 
+
+*   Haz clic en Body.
+
+Al hacer clic en Body, asegúrate de que esté seleccionada la opción JSON 
+(suele haber un menú desplegable o botones como Text, JSON, XML).
+
+/*--------------------------------------------------------------------------*/
+Ahora sí, hagamos nuestro primer INSERT en MongoDB 🍃 usando Thunder Client ⚡.
+
+En la pestaña central de la petición que configuramos como POST y con la URL 
+
+*   http://localhost:3000/tareas
+
+ve al cuadro de texto grande que apareció abajo tras seleccionar Body e ingresar a JSON.
+
+Copia y pega este texto exactamente como está (incluyendo las llaves):
+
+*   JSON
+    {
+    "titulo": "Aprender a usar MongoDB"
+    }
+
+Este formato es un objeto JSON (JavaScript Object Notation), que es la forma en la que 
+viajan los datos en Node.js y cómo se guardan como Documentos en MongoDB.
+
+Una vez que lo pegues, haz clic en el botón azul grande que dice "Send" (Enviar) arriba a 
+la derecha.
+
+*   ¡Se preguntarán!!! 
+
+¿tengo que crear una BD como en SQL?
+
+En MongoDB no necesitas crear la base de datos de forma explícita antes de usarla.
+
+En el mundo SQL, estás acostumbrado a tener que ejecutar obligatoriamente un CREATE 
+DATABASE y luego un CREATE TABLE con todas sus columnas bien definidas antes de poder 
+insertar una sola fila. Si no lo haces, el gestor te lanza un error.
+
+MongoDB funciona con un enfoque llamado creación implícita o bajo demanda (lazy creation):
+
+Al vuelo: Cuando tú envías un documento a una base de datos o a una colección (tabla) que aún
+no existe, MongoDB no falla. Simplemente revisa su sistema, nota que no existe, la crea en 
+ese mismo milisegundo y guarda la información de inmediato. 
+
+En nuestro proyecto: Por eso, cuando configuramos la URL mongodb://127.0.0.1:27017/todoDB, 
+la base de datos todoDB no existía en tu computadora. Al presionar "Send" en Thunder Client,
+MongoDB la creó por ti automáticamente junto con la colección de tareas.
+
+Esta es una de las razones por las que NoSQL es tan popular para el desarrollo rápido.
+
+Pensando en tu experiencia con la estructura firme de SQL Server, ¿qué gran ventaja o qué
+peligro te imaginas que podría traer este comportamiento de "crear todo automáticamente al 
+vuelo"?
+
+/*--------------------------------------------------------------------------*/
+
+¡Excelente! El código 201 Created significa que la fábrica de Express funcionó en el orden
+correcto y que el documento ya fue guardado con éxito.
+
+Para poder verlo visualmente en MongoDB Compass 📊, sigamos estos pasos para conectar
+la herramienta a tu base de datos local:
+
+Abre la aplicación MongoDB Compass en tu computadora.
+
+En la pantalla de bienvenida (la que me mostraste en la imagen anterior), haz clic en 
+el botón verde grande que dice "Add new connection" (Agregar nueva conexión).
+Verás un cuadro de texto que ya viene con una dirección por defecto: 
+
+*   mongodb://localhost:27017. 
+
+Déjala exactamente así. Haz clic en el botón Save & Connect (Guardar y conectar).
+Una vez que se conecte, verás un panel izquierdo con las bases de datos. Busca una 
+llamada todoDB (que es el nombre que le dimos en tu archivo index.js) y haz clic en ella. 
+Adentro encontrarás una colección llamada tareas.
+
+¿Lograste conectarte y ver la tarea "Aprender a usar MongoDB" guardada dentro de la 
+colección? 🍃
+
+/*--------------------------------------------------------------------------*/
+
+¡Qué gran avance! 🎉 Conectarse de forma visual a la base de datos es un paso clave para 
+entender cómo se estructuran los datos.
+
+Ahora que ya puedes ver tu colección de tareas en MongoDB Compass  
+(probablemente con el primer documento que insertamos desde Thunder Client), el siguiente 
+paso lógico es aprender a consultar o "leer" esas tareas desde nuestro código de Express 
+(lo que en SQL sería un SELECT * FROM Tareas).
+
+Para lograr esto, vamos a crear una ruta de tipo GET. Abre tu archivo index.js y agrega 
+este bloque de código justo debajo de la ruta POST que modificamos hace un momento:
+
+    /*--------*/
+
+*   JavaScript
+    // Ruta para LEER todas las tareas (GET)
+    app.get('/tareas', async (req, res) => {
+        try {
+            // Busca todos los documentos en la colección
+            const listaTareas = await Tarea.find(); 
+            res.status(200).json(listaTareas);
+        } catch (error) {
+            res.status(500).json({ mensaje: 'Error al obtener las tareas', error });
+        }
+    });
+    /*--------*/
+
+En el mundo de SQL Server, para traer todos los registros usarías SELECT *. Aquí, Mongoose 
+nos simplifica la vida con el método .find() sin parámetros, que le dice a MongoDB: 
+"tráeme todo lo que tengas en esta colección".
+
+Una vez que guardes los cambios en tu archivo index.js, ¿cómo prefieres probar que esta 
+nueva ruta funciona correctamente? 💻
+
+Creando una nueva petición de tipo GET en Thunder Client ⚡.
+
+Abriendo directamente la dirección http://localhost:3000/tareas en tu navegador web 🌐.
+
+¿Cuál de las dos opciones prefieres usar para comprobar que la base de datos te devuelve
+la lista de tareas? 💻
+
+/*---------------------------------------------------------------------------------------*/
+
+¡Excelente! El código 200 OK significa que la consulta fue exitosa y el servidor procesó 
+todo correctamente.
+
+Como dejamos el JSON anterior en Thunder Client, al cambiar el método a GET, la herramienta
+simplemente ignoró ese cuerpo de datos y le pidió al servidor la lista completa. En la 
+respuesta habrás visto un arreglo de JavaScript [] que contiene el documento que guardamos
+antes.
+
+Con esto ya tienes las dos operaciones fundamentales del backend listas:
+
+Crear datos (POST / INSERT). ➕
+
+Leer datos (GET / SELECT). 🔍
+
+Ahora que comprobamos que el backend responde con los datos correctos.
+
+/*---------------------------------------------------------------------------------------*/
+
+Vamos a preparar el terreno para tener el CRUD completo (Crear, Leer, Actualizar y Eliminar)
+en tu backend. Como bien dices, la lógica es muy similar y luego controlaremos todo desde 
+Thunder Client ⚡.
+
+Para lograrlo de una sola vez, vamos a escribir las dos rutas que faltan en tu archivo 
+index.js. Necesitaremos usar dos métodos nuevos de Mongoose:
+
+.findByIdAndUpdate() para modificar un documento existente (equivalente a un UPDATE en SQL).
+
+.findByIdAndDelete() para removerlo por completo (equivalente a un DELETE en SQL).
+
+Abre tu archivo index.js y agrega estos dos bloques de código justo debajo de la ruta GET
+que creamos en el paso anterior:
+    
+    /*--------*/
+*   JAVASCRIPT    
+    // Ruta para ACTUALIZAR una tarea por su ID (PUT)
+    app.put('/tareas/:id', async (req, res) => {
+        try {
+            const tareaActualizada = await Tarea.findByIdAndUpdate(
+                req.params.id, 
+                { titulo: req.body.titulo },
+                { new: true } // Esto hace que devuelva la tarea ya modificada
+            );
+            res.status(200).json(tareaActualizada);
+        } catch (error) {
+            res.status(500).json({ mensaje: 'Error al actualizar la tarea', error });
+        }
+    });
+
+    // Ruta para ELIMINAR una tarea por su ID (DELETE)
+    app.delete('/tareas/:id', async (req, res) => {
+        try {
+            await Tarea.findByIdAndDelete(req.params.id);
+            res.status(200).json({ mensaje: 'Tarea eliminada correctamente' });
+        } catch (error) {
+            res.status(500).json({ mensaje: 'Error al eliminar la tarea', error });
+        }
+    });
+    /*--------*/
+
+
+Observa que ambas rutas tienen algo especial en su dirección: /:id. Esto actúa como un 
+parámetro variable en Express, muy parecido a cuando usas un WHERE Id = @Id en SQL Server 
+para asegurarte de no modificar o borrar toda la tabla por error.
+
+Una vez que guardes el archivo y nodemon se reinicie, ve a Thunder Client o a MongoDB 
+Compass y copia el valor del _id (ese texto largo con letras y números) de la tarea que 
+creamos antes. Lo vamos a necesitar.
+
+¿Ya tienes el código guardado y el _id copiado para que hagamos la prueba de actualización? 🍃
+
+/*---------------------------------------------------------------------------------------*/
+
+¡Listo! 🚀 Vamos a hacer las tres pruebas seguidas desde Thunder Client ⚡ para ver cómo 
+reacciona MongoDB Compass 📊.
+
+Primero, para la Actualización (PUT) y la Eliminación (DELETE), necesitamos el identificador 
+único que MongoDB le asignó a tu primera tarea.
+
+*   Paso 1: Obtener el _id
+Abre MongoDB Compass y entra a tu colección tareas (dentro de todoDB).
+
+Verás el documento que creamos antes. Busca el campo que dice _id y copia ese texto largo 
+entre comillas (por ejemplo: 65f1abc...).
+
+*   Paso 2: Prueba de Actualización (PUT) 🔄
+Vamos a cambiar el título de esa tarea existente.
+
+En Thunder Client, cambia el método a PUT.
+
+En la URL, pega el ID al final de la dirección, quedando algo así: 
+
+*   http://localhost:3000/tareas/TU_ID_AQUÍ
+
+En la pestaña Body (JSON), escribe el nuevo título:
+
+    /*--------*/
+*   JSON
+    {
+    "titulo": "Dominando MongoDB y Express"
+    }
+    /*--------*/
+
+Presiona Send. Deberías recibir un código 200 OK y ver el texto modificado.
+
+*   Paso 3: Prueba de Creación (POST) ➕
+Vamos a introducir la segunda tarea que mencionaste.
+
+Cambia el método a POST.
+
+Deja la URL limpia sin el ID: http://localhost:3000/tareas
+
+En el Body (JSON), escribe el título de la nueva tarea:
+
+    /*--------*/
+*   JSON
+    {
+    "titulo": "Esta tarea será eliminada"
+    }
+    /*--------*/
+
+Presiona Send. Revisa la respuesta y copia el nuevo _id que se acaba de generar para 
+esta segunda tarea.
+
+Paso 4: Prueba de Eliminación (DELETE) 🗑️
+Ahora vamos a borrar esta última tarea que acabamos de crear.
+
+Cambia el método a DELETE.
+
+En la URL, añade el ID de la segunda tarea: 
+
+*   http://localhost:3000/tareas/ID_DE_LA_SEGUNDA_TAREA
+
+Presiona Send. El servidor te responderá con el mensaje de éxito.
+
+Una vez que completes los tres pasos en Thunder Client, ve a MongoDB Compass y presiona 
+el botón de Refresh (el icono de la flecha circular 🔄 arriba de los datos).
+
+¿Qué documentos logras ver ahora en la colección de Compass? 🍃    
